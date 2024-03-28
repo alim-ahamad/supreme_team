@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+:root.light {
+    /* Light Theme Colors */
+    --primary-color: #1E90FF;
+    /* Dodger Blue */
+    --secondary-color: #F0F0F0;
+    /* Light Gray */
+    --background-color: #FFFFFF;
+    /* White */
+    --text-color: #000;
+    /* Dark Gray */
+    --accent-color: #FF6347;
+    /* Tomato Red */
+}
+
+:root.dark {
+    /* Dark Theme Colors */
+    --primary-color: #FFA500;
+    /* Orange */
+    --secondary-color: #222;
+    /* Light Gray */
+    --background-color: #333333;
+    /* Dark Gray */
+    --text-color: #FFFFFF;
+    /* White */
+    --accent-color: #FF6347;
+    /* Tomato Red */
+}
+
+.dark .fa-sun::before {
+    content: "\f186"; /* Moon icon */
+}
+
+button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: .5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    transition: .3s linear;
+    cursor: pointer;
+}
+button:hover{
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+button.secondary {
+    background-color: var(--secondary-color);
+}
+
+
+.theme-button{
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 999;
+}
+
+header{
+    height: 80vh;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-image: url(image/setup.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+header .logo{
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    z-index: 32;
+}
+.logo img{
+    height: 3.5rem;
+    filter: brightness(100);
+}
+html.dark .logo img{
+    filter: brightness(100);
+}
+header .content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    background: rgba(0, 0, 20, 0.8);
+    flex-direction: column;
+}
+.content h1{
+    color: #fff;
+    font-size: 4.5rem;
+}
+.content p{
+    font-size: 1.5rem;
+    color: #fff;
+    opacity: 0.8;
+}
+
+
+.container{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 1px solid var(--primary-color);
+    border-top:none;
+    border-bottom: none;
+}
+.main{
+    background: var(--secondary-color);
+    padding: 5rem 2rem;
+}
+.searchbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.searchbar h2{
+    font-size: 2rem;
+    color: var(--text-color);
+}
+.search input{
+    padding: .5rem 1rem;
+    border-radius: 1rem 0 0 1rem;
+    width: 25rem;
+    border: 1px solid var(--accent-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+.search button{
+    border-radius: 0 1rem 1rem 0;
+    border: 1px solid var(--primary-color);
+}
+.search button span{
+    padding-right: .5rem;
+}
+
+.games{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+.game{
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border: 1px solid var(--text-color);
+    width: 30rem;
+}
+.game img{
+    width: 100%;
+    height: 100%;
+    transition: .5s ease;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    border: 1px solid var(--text-color);
+}
+.game img:hover{
+    animation: on-hov 5s linear;
+}
+@keyframes on-hov {
+    0%{
+        transform: rotateX(10deg) rotateY(10deg);
+    }
+    50%{
+        transform: rotateX(-10deg) rotateY(-10deg);
+    }
+    100%{
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:1200px) {
+    html {
+        font-size: 55%;
+    }
+
+}
+
+@media(max-width:880px) {
+    .content p{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .searchbar{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    .searchbar h2{
+        font-size: 2.5rem;
+    }
+    .searchbar{
+        margin-bottom: 5rem;
+    }
+}
+
+@media(max-width:780px) {
+    html {
+        font-size: 50%;
+    }
+    .games{
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    }
+    .game{
+        width: 25rem;
+    }
+}
+
+@media(max-width:480px) {
+    html {
+        font-size: 50%;
+    }
+    .content h1{
+        font-size: 3rem;
+    }
+    .content p{
+        width: 85%;
+    }
+    .searchbar{
+        text-align: center;
+    }
+    .searchbar h2{
+        font-size: 2rem;
+    }
+    .search input{
+        width: 75%;
+    }
+    .search button span{
+        display: none;
+    }
+    .games{
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+    .game{
+        width: 15rem;
+    }
+}
+@media(max-width:364px) {
+    .games{
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    }
+    .game{
+        width: 20rem;
+    }
+}

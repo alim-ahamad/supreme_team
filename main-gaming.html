@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gaming Page</title>
+
+    <link rel="stylesheet" href="main-gaming.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</head>
+
+<body>
+
+    <!-- theme switch js -->
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('light');
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+    <div class="theme-button">
+        <button onclick="toggleTheme()" class="theme-switcher"><a><i class="fa fa-sun"></i></a></button>
+    </div>
+
+    <header>
+
+        <div class="logo">
+            <img src="image/logo.png">
+        </div>
+
+        <div class="content">
+            <h1>
+                Challenges ahead,<br> we're ready for the game.
+            </h1>
+            <p>
+                Embrace challenges with our team; we're primed and ready to conquer every game thrown our way
+            </p>
+        </div>
+
+    </header>
+
+    <section class="container">
+        <div class="main">
+
+            <div class="searchbar">
+                <h2>Games that our squad play</h2>
+                <div class="search">
+                    <input type="text" id="searchInput" oninput="searchGames()" placeholder="Search game..."><button
+                        type="submit"><span>Search</span><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="games">
+                <div class="game" data-name="free fire">
+                    <a href="#">
+                        <img src="image/ff.png">
+                    </a>
+                </div>
+                <div class="game" data-name="pubg">
+                    <a href="#">
+                        <img src="image/coc-logo.png">
+                    </a>
+                </div>
+                <div class="game" data-name="Apex legends">
+                    <a href="#">
+                        <img src="image/member3.jpg">
+                    </a>
+                </div>
+                <div class="game" data-name="coc">
+                    <a href="#">
+                        <img src="image/member4.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function searchGames() {
+                var input = document.getElementById('searchInput').value.toLowerCase();
+                var games = document.querySelectorAll('.game');
+                games.forEach(function (game) {
+                    var name = game.dataset.name.toLowerCase();
+                    if (name.includes(input)) {
+                        game.style.display = 'block';
+                    } else {
+                        game.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="image/https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("AGEP6i4fIq21oTpF5");
+        })();
+    </script>
+  
+
+
+</head>
+
+<body>
+
+    <!-- theme switch js -->
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('light');
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+
+    <button class="nav-bars"><a href="#"><i class="fa fa-bars"></i></a></button>
+
+    <nav>
+
+        <div class="logo">
+            <img src="image/logo.png">
+        </div>
+
+        <ul>
+            <li><a href="#home">Home<i class="fa fa-home"></i></a></li>
+            <li><a href="#about">About<i class="fa fa-user"></i></a></li>
+            <li><a href="#contact">contact<i class="fa fa-inbox"></i></a></li>
+        </ul>
+
+        <div class="todo-list">
+            <button><a href="main-index.html">Todo-List</a></button>
+        </div>
+
+        <div class="theme-button">
+            <button onclick="toggleTheme()" class="theme-switcher"><a> <span>theme switch</span> &nbsp;<i
+                        class="fa fa-gear"></i></a></button>
+        </div>
+
+    </nav>
+
+    <div class="theme-button for-small-screens">
+        <button onclick="toggleTheme()" class="theme-switcher"><a><i class="fa fa-gear"></i></a></button>
+    </div>
+
+    <section class="section1" id="home">
+
+        <div class="container1">
+            <h1>A simple to-do list for your entire team <span>to manage tasks effortlessly</span>
+            </h1>
+
+            <p>Empower yourself with our personalized task management platform. Effortlessly organize your tasks,
+                prioritize effectively, and stay on top of your goals.</p>
+
+            <button><a href="main-index.html">Todo-List</a></button>
+
+            <br>
+
+            <span class="credit">Meet Alim Ahamad - the Creative Mind Behind the Content</span>
+        </div>
+
+    </section>
+
+
+
+
+    <script>
+        // JavaScript to toggle the visibility of the full navigation bar
+        document.addEventListener("DOMContentLoaded", function () {
+            const navBarsButton = document.querySelector('.nav-bars');
+            const nav = document.querySelector('nav');
+
+            navBarsButton.addEventListener('click', function () {
+                nav.classList.toggle('active');
+            });
+        });
+
+    </script>
+
+    <section id="about" class="about">
+
+        <div class="container">
+
+            <h1>Empower Your Team with Productivity and Collaboration</h1>
+            <p>Discover how our platform revolutionizes task management and fosters team collaboration, enabling you to
+                achieve your goals efficiently and effectively.</p>
+
+            <div class="box-holder">
+
+                <div class="box">
+                    <div class="img-holder">
+                        <img src="image/box1.jpg">
+                    </div>
+                    <div class="content">
+                        <h2>Empowering Productivity</h2>
+                        <p>Our mission is to unlock your full potential. Through dedication and innovation, we create an
+                            environment where productivity flourishes, allowing you to achieve your goals effortlessly.
+                        </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="img-holder">
+                        <img src="image/box2.jpg">
+                    </div>
+                    <div class="content">
+                        <h2>Dare to Dream</h2>
+                        <p>Dreams are the catalysts of our journey. Embrace your aspirations, harness your strengths,
+                            and
+                            fearlessly pursue your dreams. Let them guide you towards the extraordinary.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="gallery">
+
+        <div class="images">
+            <img src="image/quote5.jpg">
+            <img src="image/quote1.jpg">
+            <img src="image/quote3.jpg">
+            <img src="image/quote2.jpg">
+            <img src="image/quote6.jpg">
+            <img src="image/quote4.jpg">
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const images = document.querySelectorAll('.gallery .images img');
+
+                images.forEach(function (image) {
+                    image.addEventListener('mouseenter', function () {
+                        images.forEach(function (otherImage) {
+                            if (otherImage !== image) {
+                                otherImage.style.opacity = '0.7';
+                            }
+                        });
+                    });
+
+                    image.addEventListener('mouseleave', function () {
+                        images.forEach(function (otherImage) {
+                            otherImage.style.opacity = '1';
+                        });
+                    });
+                });
+            });
+
+        </script>
+
+    </section>
+
+    <section class="team">
+
+        <h1>TEAM MEMBERS</h1>
+
+        <div class="container">
+
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member1.jpg">
+                </div>
+                <h3>ALIM AHAMAD</h3>
+                <p>work name</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member2.jpg">
+                </div>
+                <h3>Aditya Negi</h3>
+                <p>Digital Marketing</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member3.jpg">
+                </div>
+                <h3>Veekesh Pal</h3>
+                <p>work name</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member4.jpg">
+                </div>
+                <h3>Prashant Singh</h3>
+                <p>Accountant</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member5.jpg">
+                </div>
+                <h3>name</h3>
+                <p>work name</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="members">
+                <div class="img-hold">
+                    <img src="image/member6.jpg">
+                </div>
+                <h3>name</h3>
+                <p>work name</p>
+                <div class="social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contact" id="contact">
+
+        <div class="heading">
+            <h3>
+                have questions? get in touch
+            </h3>
+            <h1>
+                Contact Us
+            </h1>
+        </div>
+
+        <form id="form">
+
+            <div>
+                <label for="name">
+                    <input name="name" type="text" id="name" placeholder="First Name" required>
+                </label>
+                <label for="lastname">
+                    <input name="lastname" type="text" id="lastname" placeholder="Last Name">
+                </label>
+            </div>
+
+            <div>
+                <label for="email">
+                    <input name="email" type="email" id="email" placeholder="type email" required>
+                </label>
+                <label for="number">
+                    <input name="number" type="number" id="num" placeholder="Phone Number">
+                </label>
+            </div>
+
+            <textarea name="message" id="message" cols="30" rows="10"
+                placeholder="Type your message here..."></textarea>
+
+            <button type="submit">Submit</button>
+
+
+        </form>
+
+    </section>
+
+
+</body>
+  <script>
+        console.log(document.getElementById("form"))
+        console.log("wroking")
+        document.getElementById("form").addEventListener("submit", function (event) {
+            console.log("i am called");
+            event.preventDefault();
+                const  from_name =document.getElementById("name").value + " " + document.getElementById("lastname").value
+                const email_id= document.getElementById("email").value
+                const message= document.getElementById("message").value
+                const phone = document.getElementById("num").value
+            console.log(from_name,email_id,message,phone,"success");
+            emailjs.send("service_l8okfvr", "template_3m6e4yo", {from_name,email_id,message,phone}, "AGEP6i4fIq21oTpF5")
+                .then( (response) =>{
+                        console.log("SUCCESS!", response.status, response.text,response);
+                        alert("submit success!");
+                    }
+                )
+                .catch((error) => {
+                    console.error("FAILED...", error);
+                })
+        })
+        
+    </script>
+</html>

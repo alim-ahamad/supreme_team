@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIM ❌ J-EX</title>
+    <link rel="stylesheet" href="main-style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <!-- theme switch js -->
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('light');
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+
+    <div class="main">
+
+        <nav class="nav">
+
+            <div class="profile">
+                <a class="name">ALIM &#10060; J-EX</a>
+                <button><a><i class="fa fa-gear"></i></a></button>
+            </div>
+
+            <div class="container">
+                <ul id="taskList">
+                    <li>
+                        <a href="#message">message<i class="fa fa-inbox"></i></a>
+                    </li>
+                    <li>
+                        <a href="#today">today<i class="fa fa-hourglass"></i></a>
+                    </li>
+                    <li>
+                        <a href="#coming">upcoming<i class="fa fa-calendar"></i></a>
+                    </li>
+                    <li>
+                        <a href="#secrets">Secret<i class="fa fa-file"></i></a>
+                    </li>
+                </ul>
+                <button class="addtask" id="addTaskBtn"><a href="#">add task</a></button>
+            </div>
+
+            <!-- add tasks according to user section js starts here -->
+            <script>
+
+
+            </script>
+            <!-- add tasks according to user section js ends here -->
+
+            <div class="team">
+                <button>
+                    <a href="#team">
+                        TEAM <i class="fa fa-users"></i>
+                    </a>
+                </button>
+            </div>
+
+        </nav>
+
+        <!-- script for adding new task -->
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const addTaskBtn = document.getElementById("addTaskBtn");
+                const taskList = document.getElementById("taskList");
+                const sections = document.querySelectorAll(".task-section");
+
+                addTaskBtn.addEventListener("click", function () {
+                    const taskName = prompt("Enter task name:");
+                    if (taskName) {
+                        // Create new task section
+                        const newSection = document.createElement("section");
+                        newSection.className = "task-section";
+                        newSection.innerHTML = `
+                            <h2>${taskName}</h2>
+                            <div class="task-container"></div>
+                            <button class="add-task-btn">Add Task</button>
+                            <div class="completed-tasks">
+                                <h3>Completed Tasks</h3>
+                                <ul class="completed-task-list"></ul>
+                            </div>
+                        `;
+
+                        // Append new task section below the last existing section
+                        const lastSection = sections[sections.length - 1];
+                        lastSection.parentNode.insertBefore(newSection, lastSection.nextSibling);
+
+                        // Add event listeners to the new task section
+                        const addTaskBtn = newSection.querySelector(".add-task-btn");
+                        const taskContainer = newSection.querySelector(".task-container");
+                        const completedTaskList = newSection.querySelector(".completed-task-list");
+
+                        addTaskBtn.addEventListener("click", function () {
+                            const taskName = prompt("Enter task name:");
+                            if (taskName) {
+                                // Create new task
+                                const newTask = document.createElement("div");
+                                newTask.classList.add("task");
+                                newTask.innerHTML = `
+                                    <span>${taskName}</span>
+                                    <button class="complete-task-btn"><i class="fa fa-check-circle"></i></button>
+                                    <button class="delete-task-btn"><i class="fa fa-trash"></i></button>
+                                `;
+
+                                // Add event listeners to the new task
+                                const completeTaskBtn = newTask.querySelector(".complete-task-btn");
+                                const deleteTaskBtn = newTask.querySelector(".delete-task-btn");
+
+                                completeTaskBtn.addEventListener("click", function () {
+                                    newTask.classList.toggle("completed");
+                                    if (newTask.classList.contains("completed")) {
+                                        completedTaskList.appendChild(newTask);
+                                    } else {
+                                        taskContainer.appendChild(newTask);
+                                    }
+                                });
+
+                                deleteTaskBtn.addEventListener("click", function () {
+                                    newTask.remove();
+                                });
+
+                                // Append new task to task container
+                                taskContainer.appendChild(newTask);
+
+                                // Create new list item for task in the navigation menu
+                                const newTaskListItem = document.createElement("li");
+                                newTaskListItem.innerHTML = `<a href="#${taskName.toLowerCase().replace(/ /g, "-")}">${taskName}</a>`;
+                                taskList.appendChild(newTaskListItem);
+                            }
+                        });
+                    }
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const addTaskBtn = document.getElementById("addTaskBtn");
+                const taskList = document.getElementById("taskList");
+
+                addTaskBtn.addEventListener("click", function () {
+                    const taskName = prompt("Enter task name:");
+                    if (taskName) {
+                        // Create new task list item
+                        const newTaskListItem = document.createElement("li");
+                        const newTaskLink = document.createElement("a");
+                        newTaskLink.href = `#${taskName.toLowerCase().replace(/ /g, "-")}`;
+                        newTaskLink.textContent = taskName;
+
+                        // Create rename icon
+                        const renameIcon = document.createElement("i");
+                        renameIcon.className = "fa fa-pencil rename-icon";
+                        newTaskLink.appendChild(renameIcon);
+
+                        // Create delete icon
+                        const deleteIcon = document.createElement("i");
+                        deleteIcon.className = "fa fa-trash delete-icon";
+                        newTaskLink.appendChild(deleteIcon);
+
+                        newTaskListItem.appendChild(newTaskLink);
+
+                        // Append new task list item to task list
+                        taskList.appendChild(newTaskListItem);
+                    }
+                });
+
+                // Add event listener for renaming and deleting tasks
+                taskList.addEventListener("click", function (event) {
+                    const target = event.target;
+                    if (target.classList.contains("rename-icon")) {
+                        const taskLink = target.parentElement;
+                        const newName = prompt("Rename task:", taskLink.textContent);
+                        if (newName) {
+                            taskLink.textContent = newName;
+
+                            // Create rename icon
+                            const renameIcon = document.createElement("i");
+                            renameIcon.className = "fa fa-pencil rename-icon";
+                            taskLink.appendChild(renameIcon);
+
+                            // Create delete icon
+                            const deleteIcon = document.createElement("i");
+                            deleteIcon.className = "fa fa-trash delete-icon";
+                            taskLink.appendChild(deleteIcon);
+                        }
+                    } else if (target.classList.contains("delete-icon")) {
+                        if (confirm("Are you sure you want to delete this task?")) {
+                            target.parentElement.parentElement.remove();
+                        }
+                    }
+                });
+            });
+
+            Separate script for creating a new section for each task
+            document.addEventListener("DOMContentLoaded", function () {
+                const addTaskBtn = document.getElementById("addTaskBtn");
+                const sections = document.querySelectorAll(".task-section");
+
+                addTaskBtn.addEventListener("click", function () {
+                    const taskName = prompt("Enter task name:");
+                    if (taskName) {
+                        // Create new task section
+                        const newSection = document.createElement("section");
+                        newSection.className = "task-section";
+                        newSection.id = taskName.toLowerCase().replace(/ /g, "-") + "-section"; // Append "-section" to avoid ID conflicts
+                        newSection.innerHTML = `
+                <h2>${taskName}</h2>
+                <div class="task-container"></div>
+                <button class="add-task-btn">Add Task</button>
+                <div class="completed-tasks">
+                    <h3>Completed Tasks</h3>
+                    <ul class="completed-task-list"></ul>
+                </div>
+            `;
+
+                        // Append new task section below the last existing section
+                        const lastSection = sections[sections.length - 1];
+                        lastSection.parentNode.insertBefore(newSection, lastSection.nextSibling);
+
+                        // Add event listener to the new task section's "Add Task" button
+                        const addTaskBtnInSection = newSection.querySelector(".add-task-btn");
+                        const taskContainer = newSection.querySelector(".task-container");
+                        const completedTaskList = newSection.querySelector(".completed-task-list");
+
+                        addTaskBtnInSection.addEventListener("click", function () {
+                            const taskName = prompt("Enter task name:");
+                            if (taskName) {
+                                // Create new task
+                                const newTask = document.createElement("div");
+                                newTask.classList.add("task");
+                                newTask.innerHTML = `
+                        <span>${taskName}</span>
+                        <button class="complete-task-btn"><i class="fa fa-check-circle"></i></button>
+                        <button class="delete-task-btn"><i class="fa fa-trash"></i></button>
+                    `;
+
+                                // Add event listeners to the new task
+                                const completeTaskBtn = newTask.querySelector(".complete-task-btn");
+                                const deleteTaskBtn = newTask.querySelector(".delete-task-btn");
+
+                                completeTaskBtn.addEventListener("click", function () {
+                                    newTask.classList.toggle("completed");
+                                    if (newTask.classList.contains("completed")) {
+                                        completedTaskList.appendChild(newTask);
+                                    } else {
+                                        taskContainer.appendChild(newTask);
+                                    }
+                                });
+
+                                deleteTaskBtn.addEventListener("click", function () {
+                                    newTask.remove();
+                                });
+
+                                // Append new task to task container
+                                taskContainer.appendChild(newTask);
+                            }
+                        });
+                    }
+                });
+            });
+
+        </script>
+
+        <!-- ends here -->
+
+        <nav class="nav2">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="main-gaming.html">gaming</a></li>
+                <li><a href="index.html#contact">contact</a></li>
+            </ul>
+
+            <div class="main-container">
+                <button onclick="toggleTheme()" class="theme-switcher"><a>theme switch<i
+                            class="fa fa-gear"></i></a></button>
+            </div>
+        </nav>
+
+        <section class="main-message task-section" id="message">
+            <h2>currently you don't have any message</h2>
+        </section>
+
+        <section class="main-today task-section" id="today">
+            <h2> today </h2>
+
+            <div class="task-container"></div>
+            <button class="add-task-btn">Add Task</button>
+            <div class="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <ul class="completed-task-list"></ul>
+            </div>
+
+
+        </section>
+
+        <section class="main-coming task-section" id="coming">
+            <h2> coming </h2>
+
+            <div class="task-container"></div>
+            <button class="add-task-btn">Add Task</button>
+            <div class="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <ul class="completed-task-list"></ul>
+            </div>
+
+        </section>
+
+        <section class="main-secret task-section" id="secrets">
+            <h2> secrets </h2>
+
+            <div class="task-container"></div>
+            <button class="add-task-btn">Add Task</button>
+            <div class="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <ul class="completed-task-list"></ul>
+            </div>
+
+        </section>
+
+        <!-- <div id="container"></div> -->
+
+        <!-- script for each task section tasks started here -->
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const addTaskButtons = document.querySelectorAll(".add-task-btn");
+
+                addTaskButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        const taskSection = button.closest(".task-section");
+                        const taskContainer = taskSection.querySelector(".task-container");
+                        const completedTaskList = taskSection.querySelector(".completed-task-list");
+                        const taskName = prompt("Enter task name:");
+
+                        if (taskName) {
+                            const newTask = document.createElement("div");
+                            newTask.classList.add("task");
+
+                            const taskText = document.createElement("span");
+                            taskText.textContent = taskName;
+                            newTask.appendChild(taskText);
+
+                            const deleteBtn = document.createElement("button");
+                            deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+                            deleteBtn.addEventListener("click", function (event) {
+                                event.stopPropagation();
+                                if (confirm("Are you sure you want to delete this task?")) {
+                                    newTask.remove();
+                                }
+                            });
+                            newTask.appendChild(deleteBtn);
+
+                            const completeBtn = document.createElement("button");
+                            completeBtn.innerHTML = '<i class="fa fa-check-circle"></i>';
+                            completeBtn.addEventListener("click", function (event) {
+                                event.stopPropagation();
+                                newTask.classList.toggle("completed");
+                                if (newTask.classList.contains("completed")) {
+                                    completedTaskList.appendChild(newTask);
+                                } else {
+                                    taskContainer.appendChild(newTask);
+                                }
+                            });
+                            newTask.appendChild(completeBtn);
+
+                            taskContainer.appendChild(newTask);
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+
+
+        <!-- script for each task section tasks ended here-->
+
+
+        <!-- team section started here -->
+
+        <section class="team-section task-section" id="team">
+            <h2> team section </h2>
+            <div class="main-content">
+                <div class="content1">
+                    <ul id="teamTaskList">
+                        <!-- Tasks will be dynamically added here -->
+                    </ul>
+                    <button id="addTeamTaskButton">Add Task</button>
+                    <div class="completed-tasks">
+                        <h3>Completed Tasks</h3>
+                        <ul id="completedTeamTaskList">
+                            <!-- Completed tasks will be dynamically added here -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content2">
+
+                    <div id="messages-container"></div>
+                    <div id="input-container">
+                        <input type="text" id="message-input" placeholder="Type your message..." onmouseenter="functionsendinput()">
+                        <button id="send-button" >Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- team section ended -->
+
+        <!-- js for adding task and complted deleted removing field starts here -->
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const addTeamTaskButton = document.getElementById("addTeamTaskButton");
+                const teamTaskList = document.getElementById("teamTaskList");
+                const completedTeamTaskList = document.getElementById("completedTeamTaskList");
+
+                addTeamTaskButton.addEventListener("click", function () {
+                    const taskName = prompt("Enter task name:");
+                    if (taskName) {
+                        const newTask = document.createElement("li");
+                        const taskText = document.createElement("span");
+                        taskText.textContent = taskName;
+                        newTask.appendChild(taskText);
+
+                        const deleteBtn = document.createElement("button");
+                        deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+                        deleteBtn.addEventListener("click", function (event) {
+                            event.stopPropagation();
+                            if (confirm("Are you sure you want to delete this task?")) {
+                                teamTaskList.removeChild(newTask);
+                            }
+                        });
+                        newTask.appendChild(deleteBtn);
+
+                        const completeBtn = document.createElement("button");
+                        completeBtn.innerHTML = '<i class="fa fa-check-circle"></i>';
+                        completeBtn.addEventListener("click", function (event) {
+                            event.stopPropagation();
+                            newTask.classList.toggle("completed");
+                            if (newTask.classList.contains("completed")) {
+                                completedTeamTaskList.appendChild(newTask);
+                            } else {
+                                teamTaskList.appendChild(newTask);
+                            }
+                        });
+                        newTask.appendChild(completeBtn);
+
+                        teamTaskList.appendChild(newTask);
+                    }
+                });
+
+                // Other functions related to team messages and their handling can be added here
+            });
+
+
+        </script>
+
+        <!-- js for adding task and complted deleted removing field ends here -->
+
+        <!-- js for team message and input section started here-->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const messagesContainer = document.getElementById("messages-container");
+                const messageInput = document.getElementById("message-input");
+                const sendButton = document.getElementById("send-button");
+
+                // Function to add a new message to the messages container
+                function addMessage(message) {
+                    const messageElement = document.createElement("div");
+                    messageElement.textContent = message;
+                    messagesContainer.appendChild(messageElement);
+                }
+
+                // Event listener for sending a message
+                sendButton.addEventListener("click", function () {
+                    const message = messageInput.value;
+                    if (message.trim() !== "") {
+                        addMessage(message);
+                        // Send the message to the server for storage and distribution to other users
+                        // This part would be handled by your back-end code
+                        messageInput.value = ""; // Clear the input field after sending the message
+                    }
+                });
+            });
+
+        </script>
+
+        <!-- js for team section ended here-->
+
+        <!-- js for sections show and hide -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get all sections
+                const sections = document.querySelectorAll("section");
+
+                // Hide all sections initially
+                sections.forEach(function (section) {
+                    section.style.display = "none";
+                });
+
+                // Get all task links and the team button
+                const taskLinks = document.querySelectorAll("#taskList li a");
+                const teamButton = document.querySelector(".team button");
+
+                // Function to show a specific section and hide others
+                function showSection(sectionId) {
+                    // Hide all sections
+                    sections.forEach(function (section) {
+                        section.style.display = "none";
+                    });
+
+                    // Show the specific section
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.style.display = "block";
+                    }
+                }
+
+                // Add click event listener to each task link
+                taskLinks.forEach(function (taskLink) {
+                    taskLink.addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent default link behavior
+                        const sectionId = taskLink.getAttribute("href").substring(1); // Remove the "#" from the href
+                        showSection(sectionId);
+                    });
+                });
+
+                // Add click event listener to the team button
+                teamButton.addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent default button behavior
+                    const sectionId = teamButton.querySelector("a").getAttribute("href").substring(1); // Remove the "#" from the href
+                    showSection(sectionId);
+                });
+            });
+
+        </script>
+
+        <!-- ended here -->
+
+    </div>
+
+
+    <!-- about section started  -->
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Welcome to [Your Team Name] Gaming Community!</h2>
+            <p>Welcome to the official website of [Your Team Name] Gaming Community! We are a passionate group of gamers
+                who share a love for various online games. Whether you're into competitive shooters, immersive
+                role-playing games, or adrenaline-pumping battle royales, you'll find a home here among fellow gaming
+                enthusiasts.</p>
+
+            <h3>About Us</h3>
+            <p>At [Your Team Name], we believe that gaming is more than just a hobby; it's a way of life. Our community
+                is built on the principles of camaraderie, sportsmanship, and above all, fun. We strive to create an
+                inclusive environment where gamers of all skill levels and backgrounds can come together to share their
+                passion for gaming.</p>
+
+            <h3>Our Team</h3>
+            <div class="team-member">
+                <h4>[Team Member Name]: Role/Game(s)</h4>
+                <p>[Brief description of the team member and their gaming expertise]</p>
+            </div>
+            <!-- Repeat the above structure for each team member -->
+
+            <h3>Join Us</h3>
+            <p>Interested in becoming a part of the [Your Team Name] Gaming Community? We're always on the lookout for
+                new talent and passionate gamers to join our ranks. Whether you're a skilled competitor or just looking
+                for a group of friends to play with, we welcome players of all levels to join our community.</p>
+
+            <h3>Get in Touch</h3>
+            <p>Have questions, comments, or just want to say hello? Don't hesitate to reach out to us! You can contact
+                us through [contact method], and we'll get back to you as soon as possible.</p>
+
+            <p>Thank you for visiting [Your Team Name] Gaming Community. We look forward to gaming with you!</p>
+
+            <button id="exit-button">Exit</button>
+        </div>
+
+    </section>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the elements
+            const aboutLinks = document.querySelectorAll("a");
+            const aboutSection = document.querySelector(".about");
+            const exitButton = document.getElementById("exit-button");
+
+            // Loop through each link to find the "About" link
+            aboutLinks.forEach(function (link) {
+                if (link.textContent.trim().toLowerCase() === "about") {
+                    // Add click event listener to the About link
+                    link.addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent default link behavior
+                        aboutSection.style.display = "block"; // Set display to 'block'
+                    });
+                }
+            });
+
+            // Add click event listener to the exit button
+            exitButton.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default button behavior
+                aboutSection.style.display = "none"; // Set display to 'none' to hide the About section
+            });
+        });
+
+
+    </script>
+
+    <!-- about section ended  -->
+</body>
+
+</html>
