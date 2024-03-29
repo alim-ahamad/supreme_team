@@ -306,7 +306,7 @@
                 const message= document.getElementById("message").value
                 const phone = document.getElementById("num").value
             console.log(from_name,email_id,message,phone,"success");
-            emailjs.send("service_l8okfvr", "template_3m6e4yo", {from_name,email_id,message,phone}, "AGEP6i4fIq21oTpF5")
+            emailjs.send("service_l8okfvr", "template_3m6e4yo", params, "AGEP6i4fIq21oTpF5")
                 .then( (response) =>{
                         console.log("SUCCESS!", response.status, response.text,response);
                         alert("submit success!");
